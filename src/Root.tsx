@@ -1,22 +1,16 @@
 import { useState } from "react";
 import data from "./data/data";
-import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import styled, { ThemeProvider, createGlobalStyle, css } from "styled-components";
 import Hamburger from "hamburger-react";
-import bg from './assets/background-stars.svg'
+import bg from '../public/assets/background-stars.svg'
 import { Link, Outlet } from "react-router-dom";
+import Venus from "./Planets/Venus";
+
 const theme = {
   fullbgc: '#070724',
   textColor: "#FFF",
   footercolor: "violet",
 };
-
-interface props {
-  
-    fullbgc: string;
-    textColor: string;
-    footercolor: string;
-
-}
 
 
 
@@ -28,27 +22,29 @@ interface props {
   }
 
 
-
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+
   body{
     width: 100vw;
     height: 100vh;
-    font-family: 'Inter', sans-serif;
     background-image: url(${bg});
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
     background-color: ${(props)=>props.theme.fullbgc};
+    font-family: 'Inter', sans-serif;
+
    ;
   }
 
 `;
 
-export default function Root() {
+export default function Root(props:prop) {
   const [isOpen, setOpen] = useState(false);
+  const [Structure, setStructure] = useState(0);
 
-  console.log(data);
-
+  
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
@@ -64,17 +60,16 @@ export default function Root() {
       </Header>
       {isOpen ?  <Menu>
         {data.map((item) => {
-          return <Category key={item.name}> <Link to={item.name}>{item.name}</Link></Category>;
+          return <Category key={item.name}> <Link  onClick={()=>setOpen(!isOpen)}to={item.name}>{item.name}</Link></Category>;
         })}
       </Menu> : null}
 
       <Planetmenu>
-      <span> OVERVIEW </span>
-      <span> STRUCTURE </span>
-      <span> SURFACE </span>
+      <Overview zina={props.state} onClick={()=>props.setState(0)}> OVERVIEW </Overview>
+      <Str zina={props.state} onClick={()=>props.setState(1)}> STRUCTURE </Str>
+      <Surface zina={props.state} onClick={()=>props.setState(2)}> SURFACE </Surface>
       </Planetmenu>
       <div>
-        
         <Outlet/>
       </div>
     </ThemeProvider>
@@ -126,3 +121,35 @@ const Planetmenu = styled.div`
 
 
 
+const Overview = styled.span<styleprops>`
+${(props)=>css`
+   border-bottom: ${props.zina ===0 && '5px solid #ffffff'} ;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  
+`}
+`
+
+const Str = styled.span<styleprops>`
+${(props)=>css`
+   border-bottom: ${props.zina ===1 && `5px solid ${props.theme.footercolor}` } ;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+`}
+`
+
+const Surface = styled.span<styleprops>`
+${(props)=>css`
+   border-bottom: ${props.zina ===2 && `5px solid ${props.theme.footercolor}` } ;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+`}
+`
