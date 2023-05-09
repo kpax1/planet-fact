@@ -1,20 +1,22 @@
 import { useState } from "react";
 import data from "./data/data";
-import styled, { ThemeProvider, createGlobalStyle, css } from "styled-components";
+import styled, {
+  ThemeProvider,
+  createGlobalStyle,
+  css,
+} from "styled-components";
 import Hamburger from "hamburger-react";
-import bg from '../public/assets/background-stars.svg'
+import bg from "../public/assets/background-stars.svg";
 import { Link, Outlet } from "react-router-dom";
 import Venus from "./Planets/Venus";
 
 const theme = {
-  fullbgc: '#070724',
+  fullbgc: "#070724",
   textColor: "#FFF",
   footercolor: "violet",
 };
 
-
-
- const GlobalStyle = createGlobalStyle<{theme: props}>`
+const GlobalStyle = createGlobalStyle<{ theme: props }>`
   *{
     box-sizing: border-box;
     margin: 0;
@@ -32,7 +34,7 @@ const theme = {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
-    background-color: ${(props)=>props.theme.fullbgc};
+    background-color: ${(props) => props.theme.fullbgc};
     font-family: 'Inter', sans-serif;
 
    ;
@@ -40,11 +42,9 @@ const theme = {
 
 `;
 
-export default function Root(props:prop) {
+export default function Root(props: prop) {
   const [isOpen, setOpen] = useState(false);
-  const [Structure, setStructure] = useState(0);
 
-  
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
@@ -58,36 +58,60 @@ export default function Root(props:prop) {
           hideOutline={false}
         />
       </Header>
-      {isOpen ?  <Menu>
-        {data.map((item) => {
-          return <Category key={item.name}> <Link  onClick={()=>setOpen(!isOpen)}to={item.name}>{item.name}</Link></Category>;
-        })}
-      </Menu> : null}
+      {isOpen ? (
+        <Menu>
+          {data.map((item) => {
+            return (
+              <Category key={item.name}>
+                {" "}
+                <Link
+                  style={linkStyle}
+                  onClick={() => setOpen(!isOpen)}
+                  to={item.name}
+                >
+                  {item.name.toUpperCase()}
+                </Link>
+              </Category>
+            );
+          })}
+        </Menu>
+      ) : null}
 
       <Planetmenu>
-      <Overview zina={props.state} onClick={()=>props.setState(0)}> OVERVIEW </Overview>
-      <Str zina={props.state} onClick={()=>props.setState(1)}> STRUCTURE </Str>
-      <Surface zina={props.state} onClick={()=>props.setState(2)}> SURFACE </Surface>
+        <Overview zina={props.state} onClick={() => props.setState(0)}>
+          {" "}
+          OVERVIEW{" "}
+        </Overview>
+        <Str zina={props.state} onClick={() => props.setState(1)}>
+          {" "}
+          STRUCTURE{" "}
+        </Str>
+        <Surface zina={props.state} onClick={() => props.setState(2)}>
+          {" "}
+          SURFACE{" "}
+        </Surface>
       </Planetmenu>
       <div>
-        <Outlet/>
+        <Outlet />
       </div>
     </ThemeProvider>
   );
 }
 
 const Menu = styled.ul`
-  background-color: red;
   transition-duration: 0.7s;
-  z-index: 100;
-
+  text-decoration: none;
 `;
 
 const Category = styled.li`
-  color: #000000;
   list-style: none;
-  transition-duration: 0.7s;
-
+  text-decoration: none;
+  margin-left: 24px;
+  margin-right: 24px;
+  border-bottom: 1px solid  rgba(255, 255, 255, 0.1);
+  height: 46px;
+  display: flex;
+  background-color: #070724;
 `;
 
 const Header = styled.header`
@@ -115,41 +139,42 @@ const Planetmenu = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-
-
-`
-
-
+`;
 
 const Overview = styled.span<styleprops>`
-${(props)=>css`
-   border-bottom: ${props.zina ===0 && '5px solid #ffffff'} ;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-  
-`}
-`
+  ${(props) => css`
+    border-bottom: ${props.zina === 0 && "5px solid #ffffff"};
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  `}
+`;
 
 const Str = styled.span<styleprops>`
-${(props)=>css`
-   border-bottom: ${props.zina ===1 && `5px solid ${props.theme.footercolor}` } ;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-`}
-`
+  ${(props) => css`
+    border-bottom: ${props.zina === 1 &&
+    `5px solid ${props.theme.footercolor}`};
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  `}
+`;
 
 const Surface = styled.span<styleprops>`
-${(props)=>css`
-   border-bottom: ${props.zina ===2 && `5px solid ${props.theme.footercolor}` } ;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-`}
-`
+  ${(props) => css`
+    border-bottom: ${props.zina === 2 &&
+    `5px solid ${props.theme.footercolor}`};
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  `}
+`;
+
+const linkStyle = {
+  margin: "1rem",
+  textDecoration: "none",
+  color: "white",
+};
