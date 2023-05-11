@@ -8,8 +8,6 @@ import styled, {
 import Hamburger from "hamburger-react";
 import bg from "../public/assets/background-stars.svg";
 import { Link, Outlet } from "react-router-dom";
-import Venus from "./Planets/Venus";
-
 const theme = {
   fullbgc: "#070724",
   textColor: "#FFF",
@@ -41,6 +39,27 @@ const GlobalStyle = createGlobalStyle<{ theme: props }>`
   }
 
 `;
+
+
+
+interface props {
+
+  fullbgc: string;
+  textColor: string;
+  footercolor: string;
+
+}
+
+
+
+interface prop{
+  state:number
+  setState: any;
+}
+
+interface styleprops{
+  zina:number;
+}
 
 export default function Root(props: prop) {
   const [isOpen, setOpen] = useState(false);

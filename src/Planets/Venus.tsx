@@ -1,7 +1,37 @@
-import React, { useState } from 'react'
 import styled from 'styled-components';
 import data from '../data/data'
 import { useLocation } from 'react-router-dom'
+
+interface VenusProps {
+  state: number;
+  setState: any;
+}
+
+
+interface filtertype {
+  name: string;
+  overview: {
+      content: string;
+      source: string;
+  };
+  structure: {
+      content: string;
+      source: string;
+  };
+  geology: {
+      content: string;
+      source: string;
+  };
+    rotation: string;
+    revolution: string;
+    radius: string;
+    temperature: string;
+    images: {
+        planet: string;
+        internal: string;
+        geology: string;
+    };
+}
 
 
 
@@ -10,8 +40,7 @@ export default function Venus(props:VenusProps) {
 
  const location = useLocation().pathname;
   const filtered:filtertype[]= data.filter(obj => obj.name === location.slice(1));
-  console.log(filtered)
-  console.log(data)
+
   return (
 
     <Content>    

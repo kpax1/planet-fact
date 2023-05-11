@@ -28,3 +28,22 @@ interface filtertype {
     setState: any;
   }
   
+
+  interface props {
+  
+    fullbgc: string;
+    textColor: string;
+    footercolor: string;
+
+}
+
+
+
+interface prop{
+    state:number
+    setState: any;
+  }
+  
+ interface styleprops{
+    zina:number;
+  }

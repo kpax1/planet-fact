@@ -1,7 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import PlanetApp from './PlanetApp.tsx'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import PlanetApp from './PlanetApp.tsx';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
