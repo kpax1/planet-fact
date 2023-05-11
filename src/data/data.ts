@@ -1,3 +1,5 @@
+import img from ''
+
 const data = [
     {
       name: "Mercury",
@@ -18,7 +20,7 @@ const data = [
       radius: "2,439.7 KM",
       temperature: "430°c",
       images: {
-        planet: "../../public/assets/planet-mercury.svg",
+        planet: "../../dist/assets/geology-mercury.png",
         internal: "../../public/assets/planet-mercury-internal.svg",
         geology: "../../public/assets/geology-mercury.png"
       }

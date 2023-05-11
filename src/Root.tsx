@@ -6,7 +6,7 @@ import styled, {
   css,
 } from "styled-components";
 import Hamburger from "hamburger-react";
-import bg from "../public/assets/background-stars.svg";
+import bg from "./assets/background-stars.svg";
 import { Link, Outlet } from "react-router-dom";
 const theme = {
   fullbgc: "#070724",
